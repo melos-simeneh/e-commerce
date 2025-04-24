@@ -19,7 +19,16 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minLength: [6, "Password must be at least 6 characters long"],
+      minLength: [8, "Password must be at least 8 characters long"],
+      validate: {
+        validator: function (v) {
+          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+            v
+          );
+        },
+        message:
+          "Password must contain at least one uppercase, one lowercase, one number and one special character",
+      },
       select: false,
     },
     cartItems: [
@@ -45,8 +54,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
-
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   try {
@@ -61,5 +68,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
+
+const User = mongoose.model("User", userSchema);
 
 export default User;
