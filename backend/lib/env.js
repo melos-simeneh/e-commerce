@@ -1,4 +1,12 @@
-const requiredEnvVars = ["PORT", "MONGO_URL", "NODE_ENV", "JWT_SECRET"];
+const requiredEnvVars = [
+  "PORT",
+  "MONGO_URL",
+  "NODE_ENV",
+  "JWT_SECRET",
+  "ACCESS_TOKEN_SECRET",
+  "REFRESH_TOKEN_SECRET",
+  "REDIS_URL",
+];
 export const checkEnvVars = () => {
   const missingEnvVars = requiredEnvVars.filter(
     (envVar) => !process.env[envVar]

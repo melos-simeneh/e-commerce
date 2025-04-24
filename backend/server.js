@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRoutes from "./routes/auth.route.js";
+import routes from "./routes/index.route.js";
 
 import { checkEnvVars } from "./lib/env.js";
 import { timestamp } from "./lib/utils.js";
@@ -18,7 +18,7 @@ app.use(express.json({ limit: "1mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-app.use("/api/auth", authRoutes);
+app.use("/api", routes);
 
 app.use(globalErrorHandler);
 

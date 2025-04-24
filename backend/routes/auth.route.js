@@ -5,7 +5,7 @@ import {
   refreshToken,
   signup,
 } from "../controllers/auth.controller.js";
-import { validateLoginBody } from "../lib/validation.js";
+import { validateLoginBody } from "../middlewares/validation.middleware.js";
 
 const router = Router();
 
