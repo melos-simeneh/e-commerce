@@ -6,6 +6,8 @@ import { checkEnvVars } from "./lib/env.js";
 import { timestamp } from "./lib/utils.js";
 import { mongoDBConnection } from "./lib/db.js";
 import { globalErrorHandler } from "./lib/errorHandler.js";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
 
 const app = express();
 
@@ -13,6 +15,8 @@ dotenv.config();
 checkEnvVars();
 
 app.use(express.json({ limit: "1mb" }));
+app.use(cookieParser());
+app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
 

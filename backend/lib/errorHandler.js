@@ -9,9 +9,16 @@ export const globalErrorHandler = (err, req, res, next) => {
   let extra = {};
 
   if (err instanceof mongoose.Error.ValidationError) {
-    statusCode = 400;
+    statusCode = 422;
     message = "Validation Error";
     extra.errors = Object.values(err.errors).map((e) => e.message);
+  } else if (err.isJoi) {
+    const joiErrors = err.details.map(({ message }) =>
+      message.replace(/['"]/g, "")
+    );
+    statusCode = 422;
+    message = "Validation Error";
+    extra.errors = joiErrors;
   } else if (err instanceof AppError) {
     statusCode = err.statusCode || 500;
     message = err.message;
