@@ -1,6 +1,6 @@
 import { AppError } from "../lib/appError.js";
 import { catchAsync } from "../lib/catchAsync.js";
-import Coupon from "../models/coupon.model";
+import Coupon from "../models/coupon.model.js";
 
 export const getCoupon = catchAsync(async (req, res) => {
   const coupon = await Coupon.findOne({ userId: req.user._id, isActive: true });
