@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import routes from "./routes/index.route.js";
-
+import path from "path";
 import { checkEnvVars } from "./lib/env.js";
 import { timestamp } from "./lib/utils.js";
 import { mongoDBConnection } from "./lib/db.js";
@@ -14,11 +14,20 @@ const app = express();
 dotenv.config();
 checkEnvVars();
 
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/api", routes);
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.use(globalErrorHandler);
 
