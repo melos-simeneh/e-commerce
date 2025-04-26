@@ -1,10 +1,12 @@
 {
-  "name": "e-commerce",
+  "name": "mern-ecommerce",
   "version": "1.0.0",
   "type": "module",
   "main": "backend/server.js",
   "scripts": {
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "Melos Simeneh Mulu",
