@@ -14,6 +14,7 @@
     "axios": "^1.9.0",
     "framer-motion": "^12.9.1",
     "lucide-react": "^0.503.0",
+    "mern-ecommerce": "file:..",
     "react": "^19.0.0",
     "react-confetti": "^6.4.0",
     "react-dom": "^19.0.0",
