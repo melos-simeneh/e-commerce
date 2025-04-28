@@ -8,6 +8,7 @@ import { mongoDBConnection } from "./lib/db.js";
 import { globalErrorHandler } from "./lib/errorHandler.js";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import cors from "cors";
 
 const app = express();
 
@@ -16,7 +17,13 @@ checkEnvVars();
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
-app.use(morgan("dev"));
+app.use(morgan("short"));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
 app.use("/api", routes);
 
