@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "build-render": "npm install && cd frontend &&  npm ci && npm run build"
   },
   "keywords": [],
   "author": "Melos Simeneh Mulu",
